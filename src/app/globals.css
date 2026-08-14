@@ -1,0 +1,138 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+@layer base {
+  html {
+    background-color: #0B121E;
+    color: #ffffff;
+  }
+
+  :root {
+    --background: 222 47% 8%;
+    --foreground: 0 0% 100%;
+    --card: 220 41% 11%;
+    --card-foreground: 0 0% 100%;
+    --popover: 220 41% 11%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 74 88% 55%;
+    --primary-foreground: 222 47% 8%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 74 88% 55%;
+    --accent-light: 74 88% 65%;
+    --accent-dark: 74 88% 45%;
+    --accent-foreground: 222 47% 8%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 217 33% 20%;
+    --input: 217 33% 20%;
+    --ring: 74 88% 55%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222 47% 8%;
+    --foreground: 0 0% 100%;
+    --card: 220 41% 11%;
+    --card-foreground: 0 0% 100%;
+    --popover: 220 41% 11%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 74 88% 55%;
+    --primary-foreground: 222 47% 8%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 74 88% 55%;
+    --accent-light: 74 88% 65%;
+    --accent-dark: 74 88% 45%;
+    --accent-foreground: 222 47% 8%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 217 33% 20%;
+    --input: 217 33% 20%;
+    --ring: 74 88% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    position: relative;
+    scroll-padding-top: calc(5rem + env(safe-area-inset-top));
+    background-color: #0B121E;
+    color: #ffffff;
+  }
+
+  body {
+    position: relative;
+    background-color: #0B121E;
+    color: #ffffff;
+    @apply font-sans antialiased;
+    overflow-wrap: break-word;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-[#111A29]/80 backdrop-blur-xl border border-slate-800 shadow-sm;
+  }
+
+  .glass-strong {
+    @apply bg-[#111A29]/90 backdrop-blur-xl border border-slate-800 shadow-md;
+  }
+
+  .glass-subtle {
+    @apply bg-[#111A29]/60 backdrop-blur-md border border-slate-800;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-white via-slate-200 to-[#D4F12A] bg-clip-text text-transparent;
+  }
+
+  .section-padding {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+
+  .container-narrow {
+    @apply max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-10;
+  }
+
+  @media (min-width: 1536px) {
+    .container-narrow {
+      max-width: 96rem;
+    }
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0B121E;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 241, 42, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 241, 42, 0.6);
+}
+
+/* Selection */
+::selection {
+  background: rgba(212, 241, 42, 0.3);
+  color: #ffffff;
+}
+
+/* Performance: skip rendering for off-screen sections */
+section[id]:not(:first-of-type) {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}

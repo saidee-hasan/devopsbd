@@ -1,0 +1,131 @@
+"use client";
+import { motion, useReducedMotion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Bot, MessageCircle, Sparkles } from "lucide-react";
+import { chatSuggestions } from "@/data/portfolio";
+import { useChatAvailability } from "@/hooks/useChatAvailability";
+import { SpotlightCard } from "@/components/ui/spotlight-card";
+
+const AITwinSection = () => {
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
+  const shouldReduceMotion = useReducedMotion();
+  const { isAvailable, status, canAttemptChat } = useChatAvailability();
+
+  const handlePromptClick = (question: string) => {
+    window.dispatchEvent(new CustomEvent("open-ai-twin", { detail: { question } }));
+  };
+
+  const statusLabel =
+    status === "available"
+      ? "AI Consultant Online"
+      : status === "checking"
+        ? "Checking AI Status"
+        : status === "unknown"
+          ? "Status Unknown"
+        : "Consultant Offline";
+
+  const primaryButtonLabel =
+    status === "available"
+      ? "Open AI Tech Consultant"
+      : status === "checking"
+        ? "Checking AI Consultant..."
+        : status === "unknown"
+          ? "Try AI Consultant"
+        : "View Consultant Status";
+
+  return (
+    <section id="ai-twin" className="section-padding relative z-10">
+      <div className="container-narrow" ref={ref}>
+        <motion.div
+          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: shouldReduceMotion ? 0.2 : 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <SpotlightCard className="w-full relative">
+            <div className="relative p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 text-center lg:text-left">
+              {/* Background Glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 opacity-50 pointer-events-none" />
+              
+              {/* Left Content */}
+              <div className="flex-1 relative z-10">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-subtle border border-black/10 dark:border-white/10 text-sm font-mono text-primary mb-6">
+                  <span
+                    className={`w-2 h-2 rounded-full motion-reduce:animate-none shadow-[0_0_6px_rgba(41,214,185,0.35)] ${
+                      status === "available"
+                        ? "bg-primary animate-pulse"
+                        : status === "checking"
+                          ? "bg-amber-400 animate-pulse"
+                          : status === "unknown"
+                            ? "bg-amber-400/70"
+                          : "bg-muted-foreground/60"
+                    }`}
+                  />
+                  {statusLabel}
+                </div>
+
+                <h2 className="text-4xl sm:text-5xl md:text-5xl font-black tracking-tight mb-6">
+                  DevOpsBD <br className="hidden lg:block"/>
+                  <span className="text-gradient">AI Tech Consultant</span>
+                </h2>
+
+                <p className="text-muted-foreground text-base sm:text-base leading-relaxed mb-4 max-w-xl text-pretty lg:mx-0 mx-auto font-medium">
+                  {isAvailable
+                    ? "Get instant answers about DevOpsBD Technologies services, project pricing estimates, technology stack recommendations, and cloud architecture solutions."
+                    : status === "checking"
+                      ? "Checking whether the live consultant is available. You can open the chat panel anytime."
+                      : status === "unknown"
+                        ? "Verifying live consultant connection. Click below to launch the assistant."
+                      : "The AI Tech Consultant is temporarily offline. Please submit an inquiry using our contact form."}
+                </p>
+
+                <p className="text-sm sm:text-base text-foreground/75 mb-8 max-w-lg lg:mx-0 mx-auto">
+                  Trained on DevOpsBD engineering capabilities, service SLAs, software pricing tiers, enterprise security protocols, and case studies.
+                </p>
+
+                <button 
+                  onClick={() => handlePromptClick("")}
+                  className={`inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-base tracking-wide transition-all duration-300 active:scale-95 ${
+                    isAvailable
+                      ? "bg-primary text-primary-foreground shadow-[0_0_16px_rgba(41,214,185,0.2)] hover:shadow-[0_0_24px_rgba(41,214,185,0.3)]"
+                      : "bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-foreground"
+                  }`}
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  {primaryButtonLabel}
+                </button>
+              </div>
+
+              {/* Right Content - Suggested Prompts */}
+              <div className="w-full lg:w-1/2 relative z-10 flex flex-col gap-3">
+                <p className="text-sm font-mono text-foreground/60 mb-2 uppercase tracking-widest hidden lg:block ml-2 font-bold flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-primary" /> Suggested Questions
+                </p>
+                {chatSuggestions.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => handlePromptClick(s)}
+                    disabled={!canAttemptChat}
+                    className={`group w-full text-left px-5 py-4 rounded-2xl border transition-all duration-300 flex items-center justify-between shadow-accent-soft ${
+                      canAttemptChat
+                        ? "bg-black/5 dark:bg-white/5 border-black/5 dark:border-white/5 hover:border-primary/30 hover:shadow-[0_14px_40px_rgba(41,214,185,0.14)]"
+                        : "bg-black/5 dark:bg-white/[0.03] border-black/5 dark:border-white/5 opacity-60 cursor-not-allowed"
+                    }`}
+                  >
+                    <span className="text-sm sm:text-base font-medium text-muted-foreground group-hover:text-foreground transition-colors mr-4">
+                      &ldquo;{s}&rdquo;
+                    </span>
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0 opacity-70 group-hover:opacity-100 transition-opacity">
+                      <Bot className="w-4 h-4 text-primary" />
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </SpotlightCard>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default AITwinSection;

@@ -1,0 +1,35 @@
+# Nikunj Khitha Portfolio — AI discovery summary
+
+Site: https://nikunj.codenex.dev
+Author: Nikunj Khitha
+Primary role: Full-Stack GenAI Engineer
+Focus: Knowledge Graph RAG systems, tenant-scoped MCP access, LLM gateways, AI infrastructure, and production-grade full-stack products
+
+Canonical pages:
+- https://nikunj.codenex.dev/
+- https://nikunj.codenex.dev/Nikunj_Resume.pdf
+
+Important homepage sections:
+- About: https://nikunj.codenex.dev/#about
+- Experience: https://nikunj.codenex.dev/#experience
+- Projects: https://nikunj.codenex.dev/#projects
+- Skills: https://nikunj.codenex.dev/#skills
+- AI Twin: https://nikunj.codenex.dev/#ai-twin
+- Contact: https://nikunj.codenex.dev/#contact
+
+Entity profiles:
+- GitHub: https://github.com/Nikunj2003
+- LinkedIn: https://www.linkedin.com/in/nikunj-khitha/
+
+Top project references:
+- CodeNex AI Builder live: https://www.codenex.dev/
+- CodeNex Backend v1: https://github.com/Nikunj2003/Codenex-backend-v1
+- CodeNex AI API Proxy: https://github.com/Nikunj2003/codenex-ai-api-proxy
+- Serenify live: https://serenify.codenex.dev/
+- Serenify source: https://github.com/Nikunj2003/Serenify
+- CodeNex Images: https://github.com/Nikunj2003/codenex-images
+- Resume Fit — CodeNex: https://github.com/Nikunj2003/Resume-Fit-Codenex
+- LLaMa MCP Streamlit: https://github.com/Nikunj2003/LLaMa-MCP-Streamlit
+
+Preferred citation URL:
+- https://nikunj.codenex.dev/
